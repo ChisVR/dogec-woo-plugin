@@ -133,8 +133,8 @@ if (class_exists('WC_Payment_Gateway')) {
         public function dogec_exchange_rate($default_currency) {
             //if ( is_checkout() ) {
     		    $response = wp_remote_get(DOGEC_API_URL."?rate=".strtolower(esc_html($default_currency)));
-                //$price = $response;
-                //$response = $price;
+                $price = $response['body'];
+                $response = $price;
 
                 if ( is_wp_error($response) )
                     return false;
