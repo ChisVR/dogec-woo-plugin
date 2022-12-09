@@ -6,8 +6,8 @@ if (class_exists('WC_Payment_Gateway')) {
         const DOGEC_API_URL = "https://payment-checker.chisdealhd.co.uk/DOGEC.php";
 
         public function __construct(){
-            $this->id = 'dogecash_payment';
-            $this->method_title = __('DogeCash cryptocurrency payment','woocommerce-dogec');
+            $this->id = 'degecash_payment';
+            $this->method_title = __('DogeCash cryptocurrency payment','woocommerce-dogecash');
             $this->method_description = __('DogeCash Payment Gateway allows you to receive payments in DOGEC cryptocurrency','woocommerce-dogecash');
             $this->has_fields = true;
             $this->init_form_fields();
@@ -21,7 +21,7 @@ if (class_exists('WC_Payment_Gateway')) {
             $this->cryptocurrency_used = "DOGEC";
             $this->default_currency_used = get_woocommerce_currency();
             $this->exchange_rate = $this->dogec_exchange_rate($this->default_currency_used);
-            $this->plugin_version = "1.0.0";
+            $this->plugin_version = "1.0.7";
 
             // Add support for "Woocommerce subscriptions" plugin
             $this->dogec_remove_filter( 'template_redirect', 'maybe_setup_cart', 100 );
@@ -33,43 +33,43 @@ if (class_exists('WC_Payment_Gateway')) {
             add_action('woocommerce_update_options_payment_gateways_'.$this->id, array($this, 'process_admin_options'));
         }
         public function init_form_fields(){
-            $this->form_fields = array(
-                'enabled' => array(
-                    'title'         => __( 'Enable/Disable', 'woocommerce-dogecash' ),
-                    'type'          => 'checkbox',
-                    'label'         => __( 'Enable DogeCash Cryptocurrency Payment', 'woocommerce-dogecash' ),
-                    'default'       => 'yes'
-                ),
-                'title' => array(
-                    'title'         => __( 'Method Title', 'woocommerce-dogecash' ),
-                    'type'          => 'text',
-                    'default'       => __( 'DogeCash Cryptocurrency Payment', 'woocommerce-dogecash' ),
-                    'desc_tip'   => __( 'The payment method title which you want to appear to the customer in the checkout page.'),
-                ),
-                'description' => array(
-                    'title' => __( 'Payment Description', 'woocommerce-dogecash' ),
-                    'type' => 'text',
-                    'default' => 'Please send the exact amount in DOGEC to the payment address bellow.',
-                    'desc_tip'   => __( 'The payment description message which you want to appear to the customer on the payment page. You can pass a thank you note as well.' ),
-                ),
-                'payment_address' => array(
-                    'title' => __( 'DogeCash Wallet Address', 'woocommerce-dogecash' ),
-                    'type' => 'text',
-                    'desc_tip'   => __( 'DogeCash wallet address where you will receive DOGEC from sales.' ),
-                ),
-                'confirmation_no' => array(
-                    'title' => __( 'Minimum Confirmations', 'woocommerce-dogecash' ),
-                    'type' => 'text',
-                    'default' => '5',
-                    'desc_tip'  => __( 'Number of confirmations upon which the order will be considered as confirmed.' ),
-                ),
-                 'max_time_limit' => array(
-                    'title' => __( 'Maximum Payment Time (in Minutes)', 'woocommerce-dogecash' ),
-                    'type' => 'text',
-                    'default' => "15",
-                    'desc_tip' => __( 'Time allowed for a user to make the required payment.' ),
-                )
-         );
+                    $this->form_fields = array(
+                        'enabled' => array(
+                            'title'         => __( 'Enable/Disable', 'woocommerce-dogecash' ),
+                            'type'          => 'checkbox',
+                            'label'         => __( 'Enable DogeCash Cryptocurrency Payment', 'woocommerce-dogecash' ),
+                            'default'       => 'yes'
+                        ),
+                        'title' => array(
+                            'title'         => __( 'Method Title', 'woocommerce-dogecash' ),
+                            'type'          => 'text',
+                            'default'       => __( 'DogeCash Cryptocurrency Payment', 'woocommerce-dogecash' ),
+                            'desc_tip'   => __( 'The payment method title which you want to appear to the customer in the checkout page.'),
+                        ),
+                        'description' => array(
+                            'title' => __( 'Payment Description', 'woocommerce-dogecash' ),
+                            'type' => 'text',
+                            'default' => 'Please send the exact amount in DOGEC to the payment address bellow.',
+                            'desc_tip'   => __( 'The payment description message which you want to appear to the customer on the payment page. You can pass a thank you note as well.' ),
+                        ),
+                        'payment_address' => array(
+                            'title' => __( 'DogeCash Wallet Address', 'woocommerce-dogecash' ),
+                            'type' => 'text',
+                            'desc_tip'   => __( 'DogeCash wallet address where you will receive DOGEC from sales.' ),
+                        ),
+                        'confirmation_no' => array(
+                            'title' => __( 'Minimum Confirmations', 'woocommerce-dogecash' ),
+                            'type' => 'text',
+                            'default' => '5',
+                            'desc_tip'  => __( 'Number of confirmations upon which the order will be considered as confirmed.' ),
+                        ),
+                         'max_time_limit' => array(
+                            'title' => __( 'Maximum Payment Time (in Minutes)', 'woocommerce-dogecash' ),
+                            'type' => 'text',
+                            'default' => "15",
+                            'desc_tip' => __( 'Time allowed for a user to make the required payment.' ),
+                        )
+                 );
         }
 
         /**
@@ -116,7 +116,7 @@ if (class_exists('WC_Payment_Gateway')) {
                     <table>
                         <tr style="vertical-align: middle; text-align: left;">
                             <td width="180">
-                                <img alt="plugin logo" width="160" style="max-height: 40px;" src="<?php echo plugins_url('img/plugin-logo-dogec.png', __FILE__) ?>">
+                                <img alt="plugin logo" width="160" style="max-height: 40px;" src="<?php echo plugins_url('img/plugin-logo.png', __FILE__) ?>">
                             </td>
                             <td>
                                 <div>Exchange rate:</div>
@@ -131,7 +131,7 @@ if (class_exists('WC_Payment_Gateway')) {
 
         // Exchange rate in the default store currency
         public function dogec_exchange_rate($default_currency) {
-            //if ( is_checkout() ) {
+    		if ( is_checkout() ) {
     		    $response = wp_remote_get(DOGEC_API_URL."?rate=".strtolower(esc_html($default_currency)));
                 $price = json_decode($response["body"]);
                 $response = $price->total;
@@ -143,7 +143,7 @@ if (class_exists('WC_Payment_Gateway')) {
                     return trim($response);
 
                 return 0;
-            //}
+            }
         }
 
 

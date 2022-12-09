@@ -1,12 +1,12 @@
 <?php
 /*
-    Plugin Name: Dogecash Payment Gateway for Woocommerce
-    Description: Payment Gateway for Dogecash Cryptocurrency
-    Version: 1.0.0
-    Author: ChisVR
-    Author URI: https://chisdealhd.co.uk
-    Plugin URI: https://github.com/ChisVR/dogec-woo-plugin
-    Developer: ChisVR
+    Plugin Name: DogeCash Payment Gateway for Woocommerce
+    Description: Payment Gateway for DogeCash Cryptocurrency
+    Version: 1.0.7
+    Author: DogeCash
+    Author URI: https://dogecash.org
+    Plugin URI: https://github.com/dogecash/dogec-woo-plugin
+    Developer: DogeCash
 */
 
 const DOGEC_API_URL = "https://payment-checker.chisdealhd.co.uk/DOGEC.php";
@@ -61,7 +61,7 @@ if (in_array('woocommerce/woocommerce.php', $active_plugins) || class_exists('Wo
 } else {
     function dogec_admin_notice()
     {
-        echo "<div style='margin-left: 2px;' class='error'><p><strong>Please install WooCommerce before using Dogecash Cryptocurrency Payment Gateway.</strong></p></div>";
+        echo "<div style='margin-left: 2px;' class='error'><p><strong>Please install WooCommerce before using DogeCash Cryptocurrency Payment Gateway.</strong></p></div>";
         deactivate_plugins('/woocommerce-dogecash/woocommerce-dogecash.php');
         wp_die();
     };
@@ -395,7 +395,7 @@ function dogec_woocommerce_locate_template($template, $template_name, $template_
 function dogec_add_plugin_page_settings_link($links)
 {
     $links[] = '<a href="' .
-        admin_url('admin.php?page=wc-settings&tab=checkout&section=dogecash_payment') .
+        admin_url('admin.php?page=wc-settings&tab=checkout&section=degecash_payment') .
         '">' . __('Settings') . '</a>';
     return $links;
 }
